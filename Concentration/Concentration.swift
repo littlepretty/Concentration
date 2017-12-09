@@ -14,9 +14,7 @@ class Concentration {
     var indexOfOneAndOnlyFaceUpCard: Int?
     
     func chooseCard(at index: Int) {
-        if cards[index].isMatched {
-            return // ignore matched cards
-        }
+        if cards[index].isMatched {return} // ignore matched cards
         if let matchIndex = indexOfOneAndOnlyFaceUpCard {
             if index != matchIndex {
                 if cards[index].identifier == cards[matchIndex].identifier {
@@ -40,6 +38,10 @@ class Concentration {
             let card = Card()
             cards += [card, card] // create a pair
         }
-        // TODO: shuffle the cards
+        // Shuffle the cards using Fisher–Yates shuffle: see https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+        for i in cards.indices {
+            let j = Int(arc4random_uniform(UInt32(cards.count - i))) + i
+            cards.swapAt(i, j)
+        }
     }
 }

@@ -19,13 +19,36 @@ class ViewController: UIViewController {
             flipCountLabel.text = "Flips: \(flipCount)"
         }
     }
-    
     // Talk to the Model
+    // Since cardButtons needs to be init first, use keyword "lazy" here
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
     
     // Give emojis to the buttons
-    var emojiChoices = ["👻", "🦇", "😈", "🎃", "🍏", "🍭", "🙀", "🍩"]
+    var emojiChoices = ["👻", "🦇", "😈", "🎃", "🍏", "🍭", "🙀", "🍩", "👺", "🍪", "🐶", "🦄"]
     var emojiDict = Dictionary<Int, String>()
+    // Lazy initialize the mapping from card id -> emoji
+    func emoji(for card: Card) -> String {
+        if emojiDict[card.identifier] == nil {
+            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
+            emojiDict[card.identifier] = emojiChoices.remove(at: randomIndex)
+        }
+        return emojiDict[card.identifier] ?? "?"
+    }
+    
+    // Start new game or end current game:
+    // 1. Reset flip count
+    // 2. Regenerate new cards/game
+    // 3. Reset card -> emoji relation
+    // 4. Update view
+    @IBAction func touchNetGameButton(_ sender: UIButton) {
+        flipCount = 0
+        game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1 ) / 2)
+        for emoji in emojiDict.values {
+            emojiChoices.append(emoji)
+        }
+        emojiDict.removeAll()
+        updateView()
+    }
     
     @IBAction func touchCardButton(_ sender: UIButton) {
         flipCount += 1
@@ -33,14 +56,6 @@ class ViewController: UIViewController {
             game.chooseCard(at: cardIndex)
             updateView()
         }
-    }
-    
-    func emoji(for card: Card) -> String {
-        if emojiDict[card.identifier] == nil {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-            emojiDict[card.identifier] = emojiChoices.remove(at: randomIndex)
-        }
-        return emojiDict[card.identifier] ?? "?"
     }
     
     func updateView() {
