@@ -12,6 +12,8 @@
 		794068EB1FDB977A00EE26F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 794068E91FDB977A00EE26F4 /* Main.storyboard */; };
 		794068ED1FDB977A00EE26F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794068EC1FDB977A00EE26F4 /* Assets.xcassets */; };
 		794068F01FDB977A00EE26F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 794068EE1FDB977A00EE26F4 /* LaunchScreen.storyboard */; };
+		794068F91FDB9EE900EE26F4 /* Concentration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794068F81FDB9EE900EE26F4 /* Concentration.swift */; };
+		794068FB1FDB9F0A00EE26F4 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794068FA1FDB9F0A00EE26F4 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		794068EC1FDB977A00EE26F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		794068EF1FDB977A00EE26F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		794068F11FDB977A00EE26F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		794068F81FDB9EE900EE26F4 /* Concentration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concentration.swift; sourceTree = "<group>"; };
+		794068FA1FDB9F0A00EE26F4 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,24 @@
 		794068E41FDB977A00EE26F4 /* Concentration */ = {
 			isa = PBXGroup;
 			children = (
-				794068E51FDB977A00EE26F4 /* AppDelegate.swift */,
+				794068F71FDB988400EE26F4 /* SupportingFiles */,
 				794068E71FDB977A00EE26F4 /* ViewController.swift */,
 				794068E91FDB977A00EE26F4 /* Main.storyboard */,
-				794068EC1FDB977A00EE26F4 /* Assets.xcassets */,
-				794068EE1FDB977A00EE26F4 /* LaunchScreen.storyboard */,
+				794068F81FDB9EE900EE26F4 /* Concentration.swift */,
+				794068FA1FDB9F0A00EE26F4 /* Card.swift */,
 				794068F11FDB977A00EE26F4 /* Info.plist */,
 			);
 			path = Concentration;
+			sourceTree = "<group>";
+		};
+		794068F71FDB988400EE26F4 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				794068E51FDB977A00EE26F4 /* AppDelegate.swift */,
+				794068EC1FDB977A00EE26F4 /* Assets.xcassets */,
+				794068EE1FDB977A00EE26F4 /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +152,8 @@
 			files = (
 				794068E81FDB977A00EE26F4 /* ViewController.swift in Sources */,
 				794068E61FDB977A00EE26F4 /* AppDelegate.swift in Sources */,
+				794068F91FDB9EE900EE26F4 /* Concentration.swift in Sources */,
+				794068FB1FDB9F0A00EE26F4 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,12 +290,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5KZZQ63BUR;
 				INFOPLIST_FILE = Concentration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jyan31.iit.Concentration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -289,12 +307,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 5KZZQ63BUR;
 				INFOPLIST_FILE = Concentration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jyan31.iit.Concentration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
