@@ -24,13 +24,19 @@ class ViewController: UIViewController {
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
     
     // Give emojis to the buttons
-    var emojiChoices = ["👻", "🦇", "😈", "🎃", "🍏", "🍭", "🙀", "🍩", "👺", "🍪", "🐶", "🦄"]
+    var theme: Int?
+    var emojiChoices = [["👻", "🦇", "😈", "🎃", "👺", "🙀", "🐉", "👹", "🤡", "☠️", "👽"],
+                        ["🍏", "🍇", "🍉", "🍋", "🍊", "🥥", "🥝", "🍓", "🍍", "🍒", "🍑"],
+                        ["🍭", "🍩", "🍪", "🍬", "🍫", "🎂", "🍰", "🍥", "🍔", "🍟", "🍕"],
+                        ["🐶", "🦄", "🦖", "🐢", "🐝", "🐛", "🐼", "🦊", "🐊", "🐣", "🐌"]]
     var emojiDict = Dictionary<Int, String>()
     // Lazy initialize the mapping from card id -> emoji
     func emoji(for card: Card) -> String {
+        let t = theme ?? Int(arc4random_uniform(UInt32(emojiChoices.count)))
+        theme = t // make sure theme is not nil
         if emojiDict[card.identifier] == nil {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
-            emojiDict[card.identifier] = emojiChoices.remove(at: randomIndex)
+            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices[t].count)))
+            emojiDict[card.identifier] = emojiChoices[t].remove(at: randomIndex)
         }
         return emojiDict[card.identifier] ?? "?"
     }
@@ -43,10 +49,13 @@ class ViewController: UIViewController {
     @IBAction func touchNetGameButton(_ sender: UIButton) {
         flipCount = 0
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1 ) / 2)
-        for emoji in emojiDict.values {
-            emojiChoices.append(emoji)
+        if let t = theme {
+            for emoji in emojiDict.values {
+                emojiChoices[t].append(emoji)
+            }
+            emojiDict.removeAll()
+            theme = nil
         }
-        emojiDict.removeAll()
         updateView()
     }
     
