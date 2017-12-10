@@ -12,13 +12,9 @@ class ViewController: UIViewController {
     // Collection of UIButtons
     @IBOutlet var cardButtons: [UIButton]!
     
-    // Automatically sync flipCountLabel with UILabel
+    @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var flipCountLabel: UILabel!
-    var flipCount = 0 {
-        didSet {
-            flipCountLabel.text = "Flips: \(flipCount)"
-        }
-    }
+
     // Talk to the Model
     // Since cardButtons needs to be init first, use keyword "lazy" here
     lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
@@ -47,7 +43,6 @@ class ViewController: UIViewController {
     // 3. Reset card -> emoji relation
     // 4. Update view
     @IBAction func touchNetGameButton(_ sender: UIButton) {
-        flipCount = 0
         game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1 ) / 2)
         if let t = theme {
             for emoji in emojiDict.values {
@@ -60,7 +55,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchCardButton(_ sender: UIButton) {
-        flipCount += 1
         if let cardIndex = cardButtons.index(of: sender) {
             game.chooseCard(at: cardIndex)
             updateView()
@@ -71,13 +65,15 @@ class ViewController: UIViewController {
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
-            if card.isFaceUp {
+            if card.isFaceUp || card.isMatched {
                 button.setTitle(emoji(for: card), for: UIControlState.normal)
                 button.backgroundColor = UIColor.white
             } else {
                 button.setTitle("", for: UIControlState.normal)
-                button.backgroundColor = card.isMatched ? UIColor.clear : UIColor.orange
+                button.backgroundColor = UIColor.orange
             }
         }
+        scoreLabel.text = "Score: \(game.score)"
+        flipCountLabel.text = "Flips: \(game.flipCount)"
     }
 }
